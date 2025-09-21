@@ -1,15 +1,15 @@
 Feature: Login functionality
 
-	#Scenario: Successful login
-	#Given I open the SauceDemo login page
-	#When I enter valid credentials
-	#Then I should see the products page
+	Scenario: Successful login
+	Given I open the SauceDemo login page
+	When I enter valid credentials
+	Then I should see the products page
 
 
-	#Scenario: Failed login with invalid credentials
-	#Given I open the SauceDemo login page
-	#When I enter invalid credentials
-	#Then I should see an error message
+	Scenario: Failed login with invalid credentials
+	Given I open the SauceDemo login page
+	When I enter invalid credentials
+	Then I should see an error message
 	
 	
 	Scenario: Add item to cart

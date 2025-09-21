@@ -42,21 +42,25 @@ def step_logged_in(context):
 
 @when('I add a product to the cart')
 def step_add_to_cart(context):
-    # Add the first product on the page
-    context.driver.find_element(By.CLASS_NAME, "inventory_list").click()
-    context.driver.find_element(By.CLASS_NAME, "btn_inventory").click()
     
-    WebDriverWait(context.driver,2).until(EC.presence_of_element_located((By.CLASS_NAME, "shopping_cart_link")))
-   
+    WebDriverWait(context.driver,5).until(EC.presence_of_element_located((By.CLASS_NAME, "inventory_list")))
+       
+    products = context.driver.find_elements(By.CLASS_NAME, "inventory_item")
+    for product in products:
+        name = product.find_element(By.CLASS_NAME, "inventory_item_name").text
+        if name == "Sauce Labs Backpack":
+            product.find_element(By.CLASS_NAME, "btn_inventory").click()
+        break
+          
 @then('the cart should contain that product')
 def step_verify_cart(context):
     # Click the cart icon
     context.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
     
-    WebDriverWait(context.driver,2).until(EC.presence_of_element_located((By.CLASS_NAME, "cart_item")))
+    WebDriverWait(context.driver,5).until(EC.presence_of_element_located((By.CLASS_NAME, "cart_item")))
     
     # Verify the cart has at least one item
     items = context.driver.find_elements(By.CLASS_NAME, "cart_item")
-    
+       
     assert len(items) > 0
     context.driver.quit()
